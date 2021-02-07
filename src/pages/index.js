@@ -1,150 +1,175 @@
-import * as React from "react"
+import React, {useRef, useEffect} from "react"
+import {applyPolyfills, defineCustomElements} from 'readability-gadget/loader';
+import './index.scss';
+import profile from '../assets/images/dariobrozzi.png';
+import legos from '../assets/images/back-home.jpg';
 
-// styles
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
-const headingAccentStyles = {
-  color: "#663399",
-}
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
-const listStyles = {
-  marginBottom: 96,
-  paddingLeft: 0,
-}
-const listItemStyles = {
-  fontWeight: "300",
-  fontSize: "24px",
-  maxWidth: "560px",
-}
 
-const linkStyle = {
-  color: "#8954A8",
-  fontWeight: "bold",
-  fontSize: "16px",
-  verticalAlign: "5%",
-}
+applyPolyfills().then(() => {
+    defineCustomElements();
+});
 
-const docLinkStyle = {
-  ...linkStyle,
-  listStyleType: "none",
-  marginBottom: 24,
-}
-
-const descriptionStyle = {
-  color: "#232129",
-  fontSize: "14px",
-}
-
-const docLink = {
-  text: "Documentation",
-  url: "https://www.gatsbyjs.com/docs/",
-  color: "#8954A8",
-}
-// data
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial/",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-    color: "#E95800",
-  },
-  {
-    text: "How to Guides",
-    url: "https://www.gatsbyjs.com/docs/how-to/",
-    description:
-      "Practical step-by-step guides to help you achieve a specific goal. Most useful when you're trying to get something done.",
-    color: "#1099A8",
-  },
-  {
-    text: "Reference Guides",
-    url: "https://www.gatsbyjs.com/docs/reference/",
-    description:
-      "Nitty-gritty technical descriptions of how Gatsby works. Most useful when you need detailed information about Gatsby's APIs.",
-    color: "#BC027F",
-  },
-  {
-    text: "Conceptual Guides",
-    url: "https://www.gatsbyjs.com/docs/conceptual/",
-    description:
-      "Big-picture explanations of higher-level Gatsby concepts. Most useful for building understanding of a particular topic.",
-    color: "#0D96F2",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-    color: "#000000",
-  },
-]
-
-// markup
 const IndexPage = () => {
-  return (
-    <main style={pageStyles}>
-      <title>Home Page</title>
-      <h1 style={headingStyles}>
-        Congratulations
-        <br />
-        <span style={headingAccentStyles}>— you just made a Gatsby site! </span>
-        <span role="img" aria-label="Party popper emojis">
-          🎉🎉🎉
-        </span>
-      </h1>
-      <p style={paragraphStyles}>
-        Edit <code style={codeStyles}>src/pages/index.js</code> to see this page
-        update in real-time.{" "}
-        <span role="img" aria-label="Sunglasses smiley emoji">
-          😎
-        </span>
-      </p>
-      <ul style={listStyles}>
-        <li style={docLinkStyle}>
-          <a
-            style={linkStyle}
-            href={`${docLink.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-          >
-            {docLink.text}
-          </a>
-        </li>
-        {links.map(link => (
-          <li style={{ ...listItemStyles, color: link.color }}>
-            <span>
-              <a
-                style={linkStyle}
-                href={`${link.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-              >
-                {link.text}
-              </a>
-              <p style={descriptionStyle}>{link.description}</p>
+    const elementRef = useRef(null);
+
+    const onReadabilityNavSelected = event => {
+        let [currentClassName, newClassName] = event.detail;
+        if (currentClassName) {
+            document.body.classList.remove(currentClassName);
+        }
+        document.body.classList.add(newClassName);
+    };
+
+    useEffect(() => {
+        const readabilityNav = elementRef.current;
+        readabilityNav.addEventListener('optionSelected', onReadabilityNavSelected);
+    });
+
+    return (
+        <>
+            <header className='header'>
+                <h1 className='header__title'><span>Dario</span> <span>Brozzi</span></h1>
+                <h2 className='header__subtitle'>Frontend Developer / UI Engineer</h2>
+
+                <readability-nav ref={elementRef}></readability-nav>
+            </header>
+            <main>
+                <div role='region'
+                     className='main__intro'
+                     aria-label='Intro'>
+                    <div className='text-content'>
+                        <p className='quote'>Helping to reduce the gap between Design and Development</p>
+                    </div>
+                </div>
+
+
+                <div role='region'
+                     className='main__doing'
+                     aria-label="what I'm doing">
+                    <h3 className='heading'>What I'm Doing</h3>
+                    <div className='text-content'>
+                        <ul>
+                            <li>
+                                Working as a <em>Frontend Developer</em> role into a scrum-team,
+                                implementing the <em>Design Language System</em> of an enterprise solution
+                                into <em>Angular</em> components.
+                            </li>
+                            <li>
+                                Updating my Usability and Accessibility concepts <a
+                                href="https://www.interaction-design.org/dario"
+                                title="Read more about what I'm learning [open in new tab]"
+                                target="_blank">learning UX Design</a>.
+                            </li>
+                            <li>
+                                Creating a <a href="https://github.com/dariobrozzi/sass-gadgets/packages"
+                                              title="Check SASS Gadgets library package [opens into a new tab]"
+                                              target="_blank">SASS
+                                Gadgets library</a> as personal project and using new SASS modules.
+                            </li>
+                            <li>
+                                Doing some <a href="https://github.com/dariobrozzi/website"
+                                              title="Check this code on Git [opens into a new tab]" target="_blank">readability
+                                experiments</a> with Stencil.js.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div role='region'
+                     className='main__love'
+                     aria-label='What I Love to Do'>
+                    <h3 className='heading'>What I Love to Do</h3>
+                    <div className='text-content'>
+                        <ul>
+                            <li>
+                                Create accurate libraries from a <em>Design Language System</em>,
+                                document and implement it into projects.
+                            </li>
+                            <li>
+                                Help to improve Design-to-Code working flow.
+                            </li>
+                            <li>
+                                Mentoring in <em>CSS</em> / <em>SCSS (SASS)</em>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div role='region'
+                     className='main__expectations'
+                     aria-label='What I Love to Do'>
+                    <h3 className='heading'>What are My Expectations</h3>
+                    <div className='text-content'>
+                        <ul>
+                            <li>
+                                Work-to-Live &mdash;
+                                having a balanced healthy life.
+                                Spending time to do sport, learn, and rest well.
+                            </li>
+                            <li>
+                                100% Remote and Anywhere &mdash;
+                                I've worked many years as a <em>freelancer</em> from different locations.
+                                A fancy office with PlayStation and free coffee... doesn't attract me at all.
+                            </li>
+                            <li>
+                                Quality &mdash;
+                                improve software using standards and useful methodologies.
+                            </li>
+                            <li>
+                                Team Flexibility &mdash;
+                                for decide without micromanagement.
+                            </li>
+                            <li>
+                                Help &mdash;
+                                build a product/service that could help the community.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <picture className='legos'>
+                    <img src={legos}
+                         alt="Keywoard with funy starwars legos"/>
+                </picture>
+            </main>
+
+            <footer className='footer'>
+                <div className='footer__section'>
+                    <img className='footer__avatar__img'
+                         src={profile}
+                         alt="Dario Brozzi"/>
+                </div>
+                <div className='footer__section'>
+                    <a className='badget badget--linkedin'
+                       href="https://www.linkedin.com/in/dariobrozzi/?locale=en_US"
+                       title="Check my profile on LinkedIn [opens into a new tab]"
+                       target="_blank">
+                        <span>Linkedin Profile</span>
+                    </a>
+                </div>
+                <div className="footer__section">
+                    <a className='badget badget--git'
+                       href="https://github.com/dariobrozzi/website"
+                       title="Check this code on Git [opens into a new tab]"
+                       target="_blank">
+            <span className="badget__text">
+              Git Repository
             </span>
-          </li>
-        ))}
-      </ul>
-      <img
-        alt="Gatsby G Logo"
-        src="data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2a10 10 0 110 20 10 10 0 010-20zm0 2c-3.73 0-6.86 2.55-7.75 6L14 19.75c3.45-.89 6-4.02 6-7.75h-5.25v1.5h3.45a6.37 6.37 0 01-3.89 4.44L6.06 9.69C7 7.31 9.3 5.63 12 5.63c2.13 0 4 1.04 5.18 2.65l1.23-1.06A7.959 7.959 0 0012 4zm-8 8a8 8 0 008 8c.04 0 .09 0-8-8z' fill='%23639'/%3E%3C/svg%3E"
-      />
-    </main>
-  )
+                    </a>
+                </div>
+                <div className="footer__section">
+                    <a className='badget badget--lib'
+                       href="https://github.com/dariobrozzi/sass-gadgets/packages"
+                       title="Check my sass library I used to build this page [opens into a new tab]"
+                       target="_blank">
+            <span className="badget__text">
+              Sass-Gadgets Library
+            </span>
+                    </a>
+                </div>
+            </footer>
+        </>
+    )
 }
 
 export default IndexPage

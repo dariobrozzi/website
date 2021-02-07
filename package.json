@@ -13,7 +13,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean"
   },
-  "dependencies": {
+  "devDependencies": {
     "gatsby": "^2.31.1",
     "gatsby-plugin-google-analytics": "^2.11.0",
     "gatsby-plugin-offline": "^3.10.0",
@@ -23,6 +23,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
-    "sass": "^1.32.6"
+    "readability-gadget": "^0.0.3",
+    "sass": "^1.32.6",
+    "sass-gadgets": "^0.0.1"
   }
 }
