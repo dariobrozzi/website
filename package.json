@@ -1,30 +1,30 @@
 {
-  "name": "website",
-  "version": "1.0.0",
-  "private": true,
-  "description": "website",
-  "keywords": [
-    "gatsby"
-  ],
+  "name": "dariobrozzi",
+  "private": false,
+  "version": "0.1.0",
+  "description": "Dario Brozzi personal website",
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "start": "parcel serve ./src/index.html",
+    "build": "parcel build ./src/index.html"
   },
   "devDependencies": {
-    "gatsby": "^2.31.1",
-    "gatsby-plugin-google-analytics": "^2.11.0",
-    "gatsby-plugin-offline": "^3.10.0",
-    "gatsby-plugin-react-helmet": "^3.10.0",
-    "gatsby-plugin-sass": "^3.2.0",
-    "gatsby-plugin-sitemap": "^2.12.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-helmet": "^6.1.0",
-    "readability-gadget": "^0.0.3",
+    "@parcel/optimizer-cssnano": "^2.0.0-nightly.592",
+    "@parcel/optimizer-htmlnano": "^2.0.0-nightly.592",
+    "@parcel/packager-css": "^2.0.0-nightly.592",
+    "@parcel/packager-html": "^2.0.0-nightly.592",
+    "@parcel/transformer-css": "^2.0.0-nightly.592",
+    "@parcel/transformer-html": "^2.0.0-nightly.592",
+    "@parcel/transformer-postcss": "^2.0.0-nightly.592",
+    "@parcel/transformer-posthtml": "^2.0.0-nightly.592",
+    "@parcel/transformer-sass": "^2.0.0-nightly.592",
+    "parcel": "^2.0.0-beta.1",
+    "postcss": "^8.2.6",
     "sass": "^1.32.6",
     "sass-gadgets": "^0.0.1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dariobrozzi/website.git"
   }
 }
